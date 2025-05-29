@@ -23,7 +23,7 @@ class Animal:
         if 0 <= new_y < 50:
             self.y = new_y
 
-class Lion():
+class Lion(Animal):
     def __init__(self, x, y):
         #사자는 초기에 굶주림 (hunger = 0)
         super().__init(x,y)
