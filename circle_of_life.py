@@ -23,6 +23,12 @@ class Animal:
         if 0 <= new_y < 50:
             self.y = new_y
 
+class Zebra(Animal):
+    """3년후 번식 가능"""
+    def reproduce(self):
+        return self.age >= 3
+
+
 class Lion():
     def __init__(self, x, y):
         #사자는 초기에 굶주림 (hunger = 0)
