@@ -23,3 +23,16 @@ class Animal:
         if 0 <= new_y < 50:
             self.y = new_y
 
+class Lion():
+    def __init__(self, x, y):
+        #사자는 초기에 굶주림 (hunger = 0)
+        super().__init(x,y)
+        self.hunger = 0
+
+    def can_reproduce(self):
+        #사자가 5살 이상이면 번식 가능
+        return self.age >= 5
+    
+    def is_starving(self):
+        #사자가 5년 동안 못 먹으면 굶어 죽음
+        return self.hunger >= 5
