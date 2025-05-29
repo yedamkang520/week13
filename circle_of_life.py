@@ -23,7 +23,7 @@ class Animal:
         if 0 <= new_y < 50:
             self.y = new_y
 
-class Lion():
+class Lion(Animal):
     def __init__(self, x, y):
         #사자는 초기에 굶주림 (hunger = 0)
         super().__init(x,y)
@@ -36,3 +36,19 @@ class Lion():
     def is_starving(self):
         #사자가 5년 동안 못 먹으면 굶어 죽음
         return self.hunger >= 5
+    
+    def move(self, zebras):
+        # 주변에 얼룩말이 있는지 확인 (상하좌우)
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        for dx, dy in directions:
+            new_x, new_y = self.x + dx, self.y + dy
+            for zebra in zebras:
+                if zebra.x == new_x and zebra.y == new_y:
+                    # 얼룩말이 바로 옆에 있으면 그 방향으로 이동 (사냥이므로 이동하지 않고 사냥 처리)
+                    # 사냥은 simulate_year에서 처리하니, 여기서는 이동만 처리 (예시로 그냥 이동)
+                    # 실제로는 사냥이므로 이동하지 않아도 되지만, 예시로 그냥 이동
+                    self.x = new_x
+                    self.y = new_y
+                    return
+        # 주변에 얼룩말이 없으면 무작위 이동
+        super().move()
