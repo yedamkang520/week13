@@ -75,3 +75,19 @@ class Ecosystem:
         key = input('enter [q] to quit:')
         if key == 'q':
             exit()
+
+    def place_animals(self):
+        positions = set() 
+        while len(self.zebras) < 20:
+            """얼룩말 배치"""
+            x, y = random.randint(0, 49), random.randint(0, 49)
+            if (x, y) not in positions:
+                self.zebras.append(Zebra(x, y))
+                positions.add((x, y))
+
+        while len(self.lions) < 5:
+            """사자 배치"""
+            x, y = random.randint(0, 49), random.randint(0, 49)
+            if (x, y) not in positions:
+                self.lions.append(Lion(x, y))
+                positions.add((x, y))
