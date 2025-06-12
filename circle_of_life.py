@@ -153,3 +153,10 @@ class Ecosystem:
 
         "현재 얼룩말과 사자 수 반환"
         return len(self.zebras), len(self.lions)
+    
+ecosystem = Ecosystem()
+for year in range(1, 6):
+    zebras, lions = ecosystem.simulate_year()
+    print(f"—— {year}년차 ——")
+    print(f"얼룩말 수: {zebras}, 사자 수: {lions}")
+    ecosystem.print_map()
