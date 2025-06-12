@@ -114,3 +114,34 @@ class Ecosystem:
             # 사냥 실패 시 굶주림 증가
             if not hunted:
                 lion.hunger += 1
+
+        """나이 증가"""        
+        for zebra in self.zebras:
+            zebra.increment_age()
+        for lion in self.lions:
+            lion.increment_age()
+
+        """죽은 사자 제거"""
+        self.lions = [lion for lion in self.lions if not lion.is_starving()]
+
+        """new zebras"""
+        new_zebras = []
+        for zebra in self.zebras:
+            if zebra.can_reproduce():
+                for dx, dy in [(0,1), (0,-1), (1,0), (-1,0)]:
+                    nx, ny = zebra.x + dx, zebra.y + dy
+                    if 0 <= nx < 50 and 0 <= ny < 50:
+                        if not any(z.x == nx and z.y == ny for z in self.zebras) and not any(l.x == nx and l.y == ny for l in self.lions):
+                            new_zebras.append(Zebra(nx, ny))
+                            break
+
+        """new lions"""
+        new_lions = []
+        for lion in self.lions:
+            if lion.can_reproduce():
+                for dx, dy in [(0,1), (0,-1), (1,0), (-1,0)]:
+                    nx, ny = lion.x + dx, lion.y + dy
+                    if 0 <= nx < 50 and 0 <= ny < 50:
+                        if not any(z.x == nx and z.y == ny for z in self.zebras) and not any(l.x == nx and l.y == ny for l in self.lions):
+                            new_lions.append(Lion(nx, ny))
+                            break
