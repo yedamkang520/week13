@@ -60,10 +60,10 @@ class Ecosystem:
         grid = [['.' for _ in range(self.size)] for _ in range(self.size)]
 
         for zebra in self.zebras:
-            "지브라 배치"
+            "얼룩말 위치 표시"
             grid[zebra.y][zebra.x] = 'Z'
         for lion in self.lions:
-            "사자 배치"
+            "사자 위치 표시"
             if grid[lion.y][lion.x] == 'Z':
                 grid[lion.y][lion.x] = 'X'
             else:
@@ -75,19 +75,3 @@ class Ecosystem:
         key = input('enter [q] to quit:')
         if key == 'q':
             exit()
-
-    def place_animals(self):
-        positions = set() 
-        while len(self.zebras) < 20:
-            """얼룩말 배치"""
-            x, y = random.randint(0, 49), random.randint(0, 49)
-            if (x, y) not in positions:
-                self.zebras.append(Zebra(x, y))
-                positions.add((x, y))
-
-        while len(self.lions) < 5:
-            """사자 배치"""
-            x, y = random.randint(0, 49), random.randint(0, 49)
-            if (x, y) not in positions:
-                self.lions.append(Lion(x, y))
-                positions.add((x, y))
