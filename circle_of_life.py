@@ -75,3 +75,42 @@ class Ecosystem:
         key = input('enter [q] to quit:')
         if key == 'q':
             exit()
+
+    def place_animals(self):
+        positions = set() 
+        while len(self.zebras) < 20:
+            """얼룩말 배치"""
+            x, y = random.randint(0, 49), random.randint(0, 49)
+            if (x, y) not in positions:
+                self.zebras.append(Zebra(x, y))
+                positions.add((x, y))
+
+        while len(self.lions) < 5:
+            """사자 배치"""
+            x, y = random.randint(0, 49), random.randint(0, 49)
+            if (x, y) not in positions:
+                self.lions.append(Lion(x, y))
+                positions.add((x, y))
+
+    def simulate_year(self):
+        "1년 동안 생태계의 변화를 시뮬레이션"
+        for zebra in self.zebras:
+            "모든 얼룩말 이동"
+            zebra.move()
+        for lion in self.lions:
+            "모든 사자 이동"
+            lion.move()
+
+        for lion in self.lions:
+            "사자 사냥 시도"
+            hunted = False
+            for zebra in self.zebras:
+                "사자와 얼룩말이 바로 옆칸(상하좌우)에 있으면 사냥"
+                if abs(lion.x - zebra.x) + abs(lion.y - zebra.y) == 1:
+                    self.zebras.remove(zebra)
+                    lion.hunger = 0  # 사냥 성공 시 굶주림 초기화
+                    hunted = True
+                    break
+            # 사냥 실패 시 굶주림 증가
+            if not hunted:
+                lion.hunger += 1
