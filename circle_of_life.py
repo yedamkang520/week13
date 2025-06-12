@@ -42,16 +42,11 @@ class Lion(Animal):
         """사자가 5년 동안 못 먹으면 굶어 죽음"""
         return self.hunger >= 5
     
-    def move(self, zebras):
-        """주변에 얼룩말이 있는지 확인 (상하좌우)"""
-        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-        for dx, dy in directions:
-            new_x, new_y = self.x + dx, self.y + dy
-            for zebra in zebras:
-                if zebra.x == new_x and zebra.y == new_y:
-                    """얼룩말이 바로 옆에 있으면 그 방향으로 이동 (사냥이므로 이동하지 않고 사냥 처리)"""
-                    self.x = new_x
-                    self.y = new_y
-                    return
-        """주변에 얼룩말이 없으면 무작위 이동"""
-        super().move()
+# Ecosystem 클래스: 전체 생태계(50x50)와 동물 배치, 시뮬레이션 관리
+class Ecosystem:
+    def __init__(self):
+        self.size = 50
+        self.zebras = []
+        self.lions = []
+        self.timestep = 0  # <-- add this line
+        self.place_animals()
