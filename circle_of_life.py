@@ -40,8 +40,7 @@ class Lion(Animal):
     
     def is_starving(self):
         """사자가 5년 동안 못 먹으면 굶어 죽음"""
-        return self.hunger >= 5
-    
+        return self.hunger >= 5    
 
 class Ecosystem:
     """전체 생태계(50x50)와 동물 배치, 시뮬레이션 관리"""
@@ -59,3 +58,20 @@ class Ecosystem:
         print('   ' + top_coord_str)
 
         grid = [['.' for _ in range(self.size)] for _ in range(self.size)]
+
+        for zebra in self.zebras:
+            "지브라 배치"
+            grid[zebra.y][zebra.x] = 'Z'
+        for lion in self.lions:
+            "사자 배치"
+            if grid[lion.y][lion.x] == 'Z':
+                grid[lion.y][lion.x] = 'X'
+            else:
+                grid[lion.y][lion.x] = 'L'
+
+        for row, line in enumerate(grid):
+            print(f'{row:2} ' + ' '.join(line))
+
+        key = input('enter [q] to quit:')
+        if key == 'q':
+            exit()
