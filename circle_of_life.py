@@ -31,7 +31,7 @@ class Zebra(Animal):
 class Lion(Animal):
     def __init__(self, x, y):
         """사자는 초기에 굶주림 (hunger = 0)"""
-        super().__init(x,y)
+        super().__init__(x,y)
         self.hunger = 0
 
     def can_reproduce(self):
@@ -126,7 +126,7 @@ class Ecosystem:
 
         new_zebras = []
         for zebra in self.zebras:
-            if zebra.can_reproduce():
+            if zebra.reproduce():
                 for dx, dy in [(0,1), (0,-1), (1,0), (-1,0)]:
                     nx, ny = zebra.x + dx, zebra.y + dy
                     if 0 <= nx < 50 and 0 <= ny < 50:
