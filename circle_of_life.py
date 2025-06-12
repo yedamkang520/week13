@@ -42,11 +42,20 @@ class Lion(Animal):
         """사자가 5년 동안 못 먹으면 굶어 죽음"""
         return self.hunger >= 5
     
-# Ecosystem 클래스: 전체 생태계(50x50)와 동물 배치, 시뮬레이션 관리
+
 class Ecosystem:
+    """전체 생태계(50x50)와 동물 배치, 시뮬레이션 관리"""
     def __init__(self):
         self.size = 50
         self.zebras = []
         self.lions = []
-        self.timestep = 0  # <-- add this line
+        self.timestep = 0  
         self.place_animals()
+
+    def print_map(self):
+        print(f'Clock: {getattr(self, "timestep", 0)}')  
+
+        top_coord_str = ' '.join([f'{coord}' for coord in range(self.size)])
+        print('   ' + top_coord_str)
+
+        grid = [['.' for _ in range(self.size)] for _ in range(self.size)]
