@@ -124,7 +124,6 @@ class Ecosystem:
         """죽은 사자 제거"""
         self.lions = [lion for lion in self.lions if not lion.is_starving()]
 
-        """new zebras"""
         new_zebras = []
         for zebra in self.zebras:
             if zebra.can_reproduce():
@@ -135,7 +134,6 @@ class Ecosystem:
                             new_zebras.append(Zebra(nx, ny))
                             break
 
-        """new lions"""
         new_lions = []
         for lion in self.lions:
             if lion.can_reproduce():
@@ -145,3 +143,13 @@ class Ecosystem:
                         if not any(z.x == nx and z.y == ny for z in self.zebras) and not any(l.x == nx and l.y == ny for l in self.lions):
                             new_lions.append(Lion(nx, ny))
                             break
+
+        "새로 태어난 얼룩말과 사자 추가"
+        self.zebras.extend(new_zebras)
+        self.lions.extend(new_lions)
+
+        "시간 한 해 증가"
+        self.timestep += 1
+
+        "현재 얼룩말과 사자 수 반환"
+        return len(self.zebras), len(self.lions)
